@@ -7,7 +7,7 @@ Um página com as intros do melhores filmes _ever_.
 
 ## Atividade
 
-Você deve usar a Star Wars API (https://swapi.dev) para poder (a) carregar
+Você deve usar a Star Wars API (https://swapi.info) para poder (a) carregar
 dinamicamente a lista de filmes e (b) também para exibir o respectivo texto
 introdutório quando o usuário selecionar um filme.
 
