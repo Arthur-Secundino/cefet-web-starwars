@@ -5,12 +5,9 @@
 //  - Quando um filme for clicado, exibir sua introdução
 
 import { play } from "./music.js";
+import { decimalParaRomano } from "./roman.js";
 
-const API_ENDPOINT = 'https://swapi.info/api'
-
-const resposta = await fetch(API_ENDPOINT + "/films");
-const jsonFilmes = await resposta.json();
-console.log(jsonFilmes);
+const API_ENDPOINT = 'https://swapi.info/api';
 
 const objetoMusica = {
     audioUrl: "./audio/tema-sw.mp3",
@@ -19,4 +16,15 @@ const objetoMusica = {
     artist: "John Williams"
 };
 
+const listaFilmesEl = document.querySelector("#filmes ul");
+
 play(objetoMusica, document.body);
+
+const resposta = await fetch(API_ENDPOINT + "/films");
+const jsonFilmes = await resposta.json();
+console.log(jsonFilmes);
+
+listaFilmesEl.innerHTML = "";
+jsonFilmes.forEach(filme => {
+    listaFilmesEl.innerHTML += `<li>Episode ${decimalParaRomano(filme.episode_id).padEnd(3, " ")} - ${filme.title}</li>`;
+});
