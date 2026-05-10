@@ -6,6 +6,7 @@
 
 import { play } from "./music.js";
 import { decimalParaRomano } from "./roman.js";
+import { restartAnimation } from "./restart-animation.js";
 
 const API_ENDPOINT = 'https://swapi.info/api';
 
@@ -17,14 +18,27 @@ const objetoMusica = {
 };
 
 const listaFilmesEl = document.querySelector("#filmes ul");
+const preEl = document.querySelector("pre");
+let filmeEl;
 
 play(objetoMusica, document.body);
 
 const resposta = await fetch(API_ENDPOINT + "/films");
 const jsonFilmes = await resposta.json();
-console.log(jsonFilmes);
 
 listaFilmesEl.innerHTML = "";
 jsonFilmes.forEach(filme => {
-    listaFilmesEl.innerHTML += `<li>Episode ${decimalParaRomano(filme.episode_id).padEnd(3, " ")} - ${filme.title}</li>`;
+    filmeEl = document.createElement("li");
+    filmeEl.innerHTML = `Episode ${decimalParaRomano(filme.episode_id).padEnd(3, " ")} - ${filme.title}`;
+
+    filmeEl.addEventListener("click", function (){
+        preEl.innerHTML = `Episode ${decimalParaRomano(filme.episode_id).padEnd(3, " ")}
+        ${filme.title}
+        
+        ${filme.opening_crawl}`;
+
+        restartAnimation(preEl);
+    });
+
+    listaFilmesEl.appendChild(filmeEl);
 });
