@@ -5,3 +5,7 @@
 //  - Quando um filme for clicado, exibir sua introdução
 
 const API_ENDPOINT = 'https://swapi.info/api'
+
+const resposta = await fetch(API_ENDPOINT + "/films");
+const jsonFilmes = await resposta.json();
+console.log(jsonFilmes);
