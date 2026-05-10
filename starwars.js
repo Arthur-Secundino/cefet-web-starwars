@@ -8,6 +8,7 @@ import { play } from "./music.js";
 import { decimalParaRomano } from "./roman.js";
 import { restartAnimation } from "./restart-animation.js";
 import { comparaFilmes } from "./sort.js";
+import { friendlyFetch } from "./friendly-fetch.js";
 
 const API_ENDPOINT = 'https://swapi.info/api';
 
@@ -24,9 +25,7 @@ let filmeEl;
 
 play(objetoMusica, document.body);
 
-const resposta = await fetch(API_ENDPOINT + "/films");
-let jsonFilmes = await resposta.json();
-
+let jsonFilmes = await friendlyFetch(API_ENDPOINT + "/films");
 jsonFilmes = jsonFilmes.sort(comparaFilmes);
 
 listaFilmesEl.innerHTML = "";
